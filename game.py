@@ -69,10 +69,12 @@ class Game:
 
             bot.send_photo(self.user.chat_id, photo, reply_markup = markup)
 
-            right = uniform(right)
-
             self.step += 1
-            self.right = (right, ) + self.namedict[right]
+
+            try:
+                self.right = (uniform(right), ) + self.namedict[uniform(right)]
+            except KeyError:
+                self.right = (uniform(right), )
 
     def check(self, bot, update):
         if uniform(update.message.text) in self.right:
